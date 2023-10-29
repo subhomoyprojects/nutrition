@@ -1,0 +1,67 @@
+@import "../assets/scss/config";
+
+.footerWrapper {
+  padding-bottom: 0 !important;
+  .container {
+    position: relative;
+  }
+  .footerTop {
+    display: none;
+    @include card(6.7rem, 2rem, $whiteColor);
+  }
+  &.newsletter {
+    padding-top: 250px;
+    margin-top: 150px;
+    .footerTop {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .footerBottom {
+    padding-bottom: 8rem;
+    h2 {
+      font-size: 2.6rem;
+      color: $whiteColor;
+      text-transform: capitalize;
+      padding-left: 1rem;
+      border-left: 5px solid $primaryColor;
+    }
+    .footerDescription {
+      margin-top: 2rem;
+      line-height: 2;
+    }
+    p {
+      color: $whiteColor;
+      font-size: 1.4rem;
+    }
+    .linksHolder {
+      li {
+        color: $whiteColor;
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+        img,
+        svg {
+          margin-right: 1rem;
+          color: $primaryColor;
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+        & > * {
+          color: $whiteColor;
+          font-weight: 500;
+          font-size: 1.6rem;
+          padding-block: 5px;
+          display: flex;
+          &:hover {
+            color: $primaryColor;
+          }
+        }
+        span {
+          display: inline-flex;
+          flex: 1;
+        }
+      }
+    }
+  }
+}

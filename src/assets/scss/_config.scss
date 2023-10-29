@@ -1,0 +1,610 @@
+@import url("https://use.typekit.net/ixa0tdg.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+// font-family: "nasalization", sans-serif;
+// font-family: 'Montserrat', sans-serif;
+
+/*======================================= Variables
+===============================================================*/
+// color
+$blackColor: #000;
+$whiteColor: #fff;
+$primaryColor: #e28539;
+$primaryColor1: #f5a25d;
+$secondaryColor: #002147;
+$lightBlue: #003879;
+$inputBorderColor: #ededed;
+$placeholderColor: #333;
+$textColor: #717171;
+$footerColor: #0a0a23;
+
+// font-weight
+$font-weights: (
+  "regular": 400,
+  "sami-bold": 500,
+  "bold": 700,
+  "extra-bold": 900,
+);
+
+// Break point size
+$desktopSize: 1200px;
+$smallDesktopSize: 992px;
+$tabLandscapeSize: 1024px;
+$tabPortraitSize: 768px;
+$mobile: 576px;
+$belowmobile: 575px;
+
+/*======================================= Functions====================================
+=======================================================================================*/
+@function weight($weight-name) {
+  @return map-get($map: $font-weights, $key: $weight-name);
+}
+
+// If you want bullet in li default is true
+@mixin bullet($bullet: true) {
+  @if $bullet {
+    li {
+      position: relative;
+      padding-left: 15px;
+
+      &::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 100%;
+        position: absolute;
+        left: 1px;
+        top: 6px;
+        background-color: $primaryColor;
+        display: block;
+      }
+    }
+  } @else {
+    li {
+      padding-left: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+/*======================================= Mixing=======================================================
+=======================================================================================================*/
+
+// Font Mixing
+
+@mixin nasalization {
+  font-family: "nasalization", sans-serif !important;
+}
+@mixin montserrat {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+// Clearfix
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  *zoom: 1;
+}
+
+// Break Point
+
+@mixin desktop {
+  @media (min-width: $desktopSize) {
+    @content;
+  }
+}
+
+@mixin smallDesktop {
+  @media (min-width: $smallDesktopSize) {
+    @content;
+  }
+}
+
+@mixin tabLandscape {
+  @media (min-width: $tabLandscapeSize) {
+    @content;
+  }
+}
+
+@mixin tabPortrait {
+  @media (min-width: $tabPortraitSize) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (min-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin belowMobile {
+  @media (max-width: $belowmobile) {
+    @content;
+  }
+}
+
+// Flex
+
+@mixin flex {
+  display: flex !important;
+}
+
+@mixin inline-flex {
+  display: inline-flex !important;
+}
+
+@mixin justify-content($flex-justify) {
+  justify-content: $flex-justify !important;
+}
+
+@mixin align-items($flex-items) {
+  align-items: $flex-items !important;
+}
+
+@mixin flex-wrap($flex-wrap) {
+  flex-wrap: $flex-wrap !important;
+}
+
+@mixin flex-direction($flex-direction) {
+  flex-direction: $flex-direction !important;
+}
+
+@mixin order($order) {
+  order: $order !important;
+}
+
+@mixin align-content($align-content) {
+  align-content: $align-content !important;
+}
+
+// Transition
+
+@mixin transition($mileseconds) {
+  transition: all ease-in-out $mileseconds;
+}
+
+// Transform
+
+@mixin transform($transform...) {
+  transform: $transform;
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+}
+
+// Border Radius
+
+@mixin radius($radius...) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+// Vertical Center
+
+@mixin vertical-center {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50.1%);
+  -ms-transform: translateY(-50.1%);
+  transform: translateY(-50.1%);
+}
+
+// Font Weight
+
+@mixin font-weight($weightValue) {
+  font-weight: weight($weightValue);
+}
+
+// Appearance
+
+@mixin appearance($appearance) {
+  appearance: $appearance;
+}
+
+// Placeholder
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+// Box Shadow
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+// Box sizing
+
+@mixin box-sizing {
+  box-sizing: border-box;
+}
+
+// common btn
+
+@mixin commonBtn {
+  background-color: $primaryColor;
+  border: 1px solid $primaryColor;
+  color: $whiteColor !important;
+  min-width: 172px;
+  font-size: 18px;
+  outline: 0 !important;
+  @include box-shadow(none);
+  @include transition(0.3s);
+  @include radius(35px);
+  text-align: center;
+  line-height: 48px;
+  padding: 0 20px;
+
+  &:hover {
+    background-color: $secondaryColor;
+    color: $whiteColor;
+    border: 1px solid $secondaryColor;
+  }
+}
+
+/* common Style Start */
+
+* {
+  @include box-sizing;
+}
+
+html {
+  font-size: 10px;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  @include montserrat;
+  font-weight: weight(regular);
+  font-size: 1.4rem;
+  color: $textColor;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: inline-block;
+  height: auto;
+  vertical-align: middle;
+}
+
+a,
+button,
+input[type="submit"] {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+a,
+button,
+input[type="submit"] {
+  @include transition(0.3s);
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:active {
+    text-decoration: none;
+  }
+}
+
+span,
+strong,
+small {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+section,
+main,
+address,
+aside,
+figure,
+figcaption {
+  display: block;
+}
+
+strong,
+label {
+  @include font-weight(bold);
+}
+
+label {
+  vertical-align: top;
+}
+
+figure {
+  margin: 0;
+}
+
+p,
+.css-ahj2mt-MuiTypography-root {
+  margin: 0 0 20px 0;
+  font-size: 1.6rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include nasalization();
+  padding: 0;
+  margin: 0 0 20px 0;
+  @include font-weight(bold);
+  line-height: 1.2;
+  color: $blackColor;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+ul {
+  @include bullet(false);
+}
+
+ul.bullet {
+  @include bullet(true);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+select {
+  @include appearance(none);
+  padding: 5px 12px;
+  min-height: 36px;
+  line-height: 36px;
+  border: 1px solid $inputBorderColor;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 0.9em;
+  background-position: calc(100% - 0.5em) center;
+  background-repeat: no-repeat;
+  min-height: 36px;
+  line-height: 36px;
+  cursor: pointer;
+  border: 1px solid $inputBorderColor;
+  background-color: inherit;
+  @include radius(2px);
+  color: $placeholderColor;
+
+  option {
+    color: $blackColor;
+  }
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  text-align: center;
+  @include appearance(none);
+  cursor: pointer;
+
+  &:hover {
+    outline: none;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn {
+  outline: 0;
+  text-decoration: none;
+  @include commonBtn;
+}
+
+section {
+  @include belowMobile {
+    padding: 20px 0;
+  }
+
+  @include mobile {
+    padding: 30px 0;
+  }
+
+  @include tabLandscape {
+    padding: 40px 0;
+  }
+
+  @include desktop {
+    padding: 60px 0;
+  }
+}
+.text-center {
+  text-align: center;
+}
+@mixin common-gap($gap) {
+  padding-block: $gap;
+
+  @media (max-width: 1199px) {
+    padding-block: calc($gap / 2);
+  }
+}
+
+.commonGap {
+  @include common-gap(6rem);
+}
+@mixin card($padding, $radius, $background) {
+  @include radius($radius);
+  @include box-shadow(0px 17px 55px 0px rgba($color: $blackColor, $alpha: 0.08));
+  padding: $padding;
+  border: 1px solid $inputBorderColor;
+  background-color: $background;
+}
+
+.card {
+  @include card(2rem, 2.7rem, $whiteColor);
+}
+@mixin scrollBar($color) {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $color transparent;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color;
+    @include radius(10px);
+  }
+}
+@mixin pageLoader {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+
+  & > div {
+    transform-origin: 40px 40px;
+    animation: lds-spinner 1.2s linear infinite;
+
+    &::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 3px;
+      left: 37px;
+      width: 6px;
+      height: 18px;
+      border-radius: 20%;
+      background: $whiteColor;
+    }
+
+    &:nth-child(1) {
+      @include transform(rotate(0deg));
+      animation-delay: -1.1s;
+    }
+
+    &:nth-child(2) {
+      @include transform(rotate(30deg));
+      animation-delay: -1s;
+    }
+
+    &:nth-child(3) {
+      @include transform(rotate(60deg));
+      animation-delay: -0.9s;
+    }
+
+    &:nth-child(4) {
+      @include transform(rotate(90deg));
+      animation-delay: -0.8s;
+    }
+
+    &:nth-child(5) {
+      @include transform(rotate(120deg));
+      animation-delay: -0.7s;
+    }
+
+    &:nth-child(6) {
+      @include transform(rotate(150deg));
+      animation-delay: -0.6s;
+    }
+
+    &:nth-child(7) {
+      @include transform(rotate(180deg));
+      animation-delay: -0.5s;
+    }
+
+    &:nth-child(8) {
+      @include transform(rotate(210deg));
+      animation-delay: -0.4s;
+    }
+
+    &:nth-child(9) {
+      @include transform(rotate(240deg));
+      animation-delay: -0.3s;
+    }
+
+    &:nth-child(10) {
+      @include transform(rotate(270deg));
+      animation-delay: -0.2s;
+    }
+
+    &:nth-child(11) {
+      @include transform(rotate(300deg));
+      animation-delay: -0.1s;
+    }
+
+    &:nth-child(12) {
+      @include transform(rotate(330deg));
+      animation-delay: 0s;
+    }
+  }
+
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+/* Common Style End */

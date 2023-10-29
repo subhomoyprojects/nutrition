@@ -1,0 +1,121 @@
+@import "./assets/scss/config";
+
+h1 {
+  font-size: 5rem;
+  span {
+    color: $primaryColor;
+  }
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+h4 {
+  font-size: 1.8rem;
+}
+h5 {
+  font-size: 1.6rem;
+}
+.whyToChooseWrapper {
+  background: linear-gradient(180deg, $lightBlue 0%, $secondaryColor 100%);
+}
+p {
+  @include montserrat();
+}
+.clientCountWrapper {
+  position: relative;
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+  &::after {
+    content: "";
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: $primaryColor linear-gradient(97deg, $primaryColor1 26.82%, $primaryColor 62.08%);
+    @include radius(3rem 0 0 3rem);
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    max-width: calc(100% - (50% - (1200px / 2)));
+  }
+}
+.mobilApplicationWrapper {
+  background: url("./assets/images/healther-bg.svg") no-repeat right 5rem center;
+  background-size: contain;
+  padding-bottom: 0;
+}
+.testimonialsWrapper {
+  position: relative;
+  text-align: right;
+  & > * {
+    position: relative;
+    z-index: 2;
+    .swiper {
+      text-align: left;
+    }
+  }
+  &::after {
+    content: "";
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(266deg, $lightBlue 0%, $secondaryColor 99.55%);
+    @include radius(0 3rem 3rem 0);
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    max-width: calc(100% - (50% - (1200px / 2)));
+  }
+}
+.prevNextBtnHolder {
+  display: inline-flex;
+  align-items: center;
+  min-width: 8rem;
+  max-width: 8rem;
+  position: relative;
+  div {
+    color: $whiteColor;
+    @include transition(0.3s);
+    &[class^="swiper-button-"] {
+      &::after {
+        display: none;
+      }
+    }
+    &:hover {
+      color: $primaryColor;
+    }
+    &.swiper-button-prev {
+      left: 0;
+      right: auto;
+    }
+    &.swiper-button-next {
+      right: 0;
+      left: auto;
+    }
+  }
+}
+
+.footerWrapper {
+  background-color: $footerColor;
+}
+
+.mt-10 {
+  margin-top: 1rem;
+}
+.mt-20 {
+  margin-top: 2rem;
+}
+.mt-30 {
+  margin-top: 3rem;
+}
+.mt-40 {
+  margin-top: 4rem;
+}
+.mt-50 {
+  margin-top: 5rem;
+}

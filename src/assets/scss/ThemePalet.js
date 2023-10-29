@@ -1,0 +1,15 @@
+export const ColorPalette = {
+  blackColor: "#000",
+  whiteColor: "#fff",
+  primaryColor: "#E28539",
+  secondaryColor: "#002147",
+  headerBorderColor: "#EBEBEB",
+  footerBackground: "#0A0A23",
+  textColor: "#717171,",
+  darkGray: "#1E1E1E",
+  lightBlue: "#003879",
+  lightOrange: "#FFF2E8",
+  footerColor: "#0a0a23",
+  copyRight: "#0D0D2E",
+  inputBorderColor: "#E7E7E7",
+};
