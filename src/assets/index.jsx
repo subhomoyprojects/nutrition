@@ -20,6 +20,9 @@ import blog1 from "./images/blog1.png";
 import blog2 from "./images/blog2.png";
 import blog3 from "./images/blog3.png";
 import newsletterDecoration from "./images/newsletterDecoration.svg";
+import signup from "./images/signup.png";
+import login from "./images/login.png";
+import noImage from "./images/noImage.jpg";
 
 export default {
   logo,
@@ -44,4 +47,7 @@ export default {
   blog2,
   blog3,
   newsletterDecoration,
+  signup,
+  login,
+  noImage,
 };

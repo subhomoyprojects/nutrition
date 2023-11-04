@@ -119,3 +119,18 @@ p {
 .mt-50 {
   margin-top: 5rem;
 }
+.p-0 {
+  padding: 0 !important;
+}
+.text-center {
+  text-align: center;
+  justify-content: center;
+}
+.text-left {
+  text-align: left;
+  justify-content: flex-start;
+}
+.text-right {
+  text-align: right;
+  justify-content: flex-end;
+}

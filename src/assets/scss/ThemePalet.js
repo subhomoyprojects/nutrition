@@ -12,4 +12,6 @@ export const ColorPalette = {
   footerColor: "#0a0a23",
   copyRight: "#0D0D2E",
   inputBorderColor: "#E7E7E7",
+  authSubTitle: "#414141",
+  errorColor: "#f00",
 };

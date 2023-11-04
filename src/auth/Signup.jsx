@@ -1,92 +1,55 @@
-import { useForm } from "react-hook-form";
-import { Button, Container, Grid, TextField } from "@mui/material";
+import React from "react";
+import CommonAuthWrapper from "../components/CommonAuthWrapper";
+import { Box, Typography } from "@mui/material";
+import CommonTextField from "../components/CommonTextField";
+import assets from "../assets";
+import { VisuallyHiddenInput } from "../style/AuthWrapperStyle";
 import { CloudUpload } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
-import { registerAuth } from "../redux/slice/AuthSlice";
+import { CommonButton } from "../style/CommonButton";
+import { ColorPalette } from "../assets/scss/ThemePalet";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const dispatch = useDispatch();
-
-  const onSubmit = async (data) => {
-    try {
-      const { first_name, last_name, email, password, profile_pic } = data;
-      const formData = new FormData();
-      formData.append("first_name", first_name);
-      formData.append("last_name", last_name);
-      formData.append("email", email);
-      formData.append("password", password);
-      formData.append("profile_pic", profile_pic[0]);
-      const response = dispatch(registerAuth(formData));
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <Container>
-      <h1>FormDataPass</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container maxWidth={900} spacing={2}>
-          <Grid item sm={6}>
-            <TextField
-              label="First Name"
-              fullWidth
-              {...register("first_name", { required: true, minLength: 3 })}
-              error={!!errors.first_name}
-              helperText={errors.first_name?.type === "required" ? "First name is required" : errors.first_name?.type === "minLength" ? "Minimum 3 characters are required" : ""}
-            />
-          </Grid>
-          <Grid item sm={6}>
-            <TextField label="Last Name" fullWidth {...register("last_name", { required: true })} error={!!errors.last_name} helperText={errors.last_name && "Last name is required"} />
-          </Grid>
-          <Grid item sm={6}>
-            <TextField
-              label="Email"
-              fullWidth
-              {...register("email", { required: true, pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })}
-              error={!!errors.email}
-              helperText={errors.email?.type === "required" ? "Email is required" : errors.email?.type === "pattern" ? "Valid email is required" : ""}
-            />
-          </Grid>
-          <Grid item sm={6}>
-            <TextField
-              label="Password"
-              fullWidth
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters long",
-                },
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message: "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number, and one special character",
-                },
-              })}
-              error={!!errors.password}
-              helperText={errors.password ? errors.password.message : ""}
-            />
-          </Grid>
-          <Grid item sm={12}>
-            {/* <Button size="large" fullWidth component="label" variant="outlined" startIcon={<CloudUpload />}>
-              Upload file
-              <VisuallyHiddenInput type="file" {...register("profile_pic", { required: true })} error={!!errors.profile_pic} />
-            </Button> */}
-          </Grid>
-          <Grid item sm={12}>
-            <Button type="submit" variant="contained" color="secondary" fullWidth size="large">
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-    </Container>
+    <>
+      <CommonAuthWrapper title="Signup" subInfo="Create your new account for lorem@email.com by completing these details." rightImage={assets.signup}>
+        <Box className="leftSide">
+          <form>
+            <Box className="form-group">
+              <Box>
+                <label>First Name</label>
+                <CommonTextField id="fName" variant="outlined" label="Enter your first name" />
+              </Box>
+              <Box>
+                <label>Last Name</label>
+                <CommonTextField id="lName" variant="outlined" label="Enter your last name" />
+              </Box>
+            </Box>
+            <Box className="form-group">
+              <label>Email</label>
+              <CommonTextField id="lName" variant="outlined" label="Enter your email" />
+            </Box>
+            <Box className="form-group">
+              <label>Password</label>
+              <CommonTextField id="lName" variant="outlined" label="Enter your password" />
+            </Box>
+            <Box className="form-group">
+              <CommonButton component="label" variant="contained" startIcon={<CloudUpload />} style={{ backgroundColor: `${ColorPalette.secondaryColor}` }}>
+                Upload file
+                <VisuallyHiddenInput type="file" />
+              </CommonButton>
+            </Box>
+            <Box className="form-group text-center">
+              <CommonButton fullWidth variant="contained" style={{ backgroundColor: `${ColorPalette.primaryColor}` }}>
+                Signup
+              </CommonButton>
+            </Box>
+          </form>
+          <Typography variant="body1" className="pageGo">
+            Already have an account? <Link to="/login">Sigin</Link>
+          </Typography>
+        </Box>
+      </CommonAuthWrapper>
+    </>
   );
 }

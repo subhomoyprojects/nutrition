@@ -12,6 +12,9 @@ export const CommonButton = styled(Button)`
   font-weight: 600;
   border-radius: 1.9rem;
   min-height: 5.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: ${ColorPalette.blackColor} !important;
   }

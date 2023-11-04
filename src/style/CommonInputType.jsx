@@ -16,4 +16,7 @@ export const CommonInputType = styled(TextField)`
   input {
     font-size: 1.6rem;
   }
+  textarea {
+    font-size: 1.6rem;
+  }
 `;
