@@ -8,8 +8,14 @@ import { CloudUpload } from "@mui/icons-material";
 import { CommonButton } from "../style/CommonButton";
 import { ColorPalette } from "../assets/scss/ThemePalet";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 export default function Signup() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
   return (
     <>
       <CommonAuthWrapper title="Signup" subInfo="Create your new account for lorem@email.com by completing these details." rightImage={assets.signup}>
@@ -18,20 +24,27 @@ export default function Signup() {
             <Box className="form-group">
               <Box>
                 <label>First Name</label>
-                <CommonTextField id="fName" variant="outlined" label="Enter your first name" />
+                <CommonTextField
+                  variant="outlined"
+                  label="Enter your first name"
+                  multiline={false}
+                  {...register(first_name, { required: true, maxLength: 3 })}
+                  error={!!errors.first_name}
+                  helperText={errors.first_name?.type === "required" ? "First name is required" : errors.first_name?.type === "minLength" ? "Minimum 3 characters are required" : ""}
+                />
               </Box>
               <Box>
                 <label>Last Name</label>
-                <CommonTextField id="lName" variant="outlined" label="Enter your last name" />
+                <CommonTextField variant="outlined" label="Enter your last name" />
               </Box>
             </Box>
             <Box className="form-group">
               <label>Email</label>
-              <CommonTextField id="lName" variant="outlined" label="Enter your email" />
+              <CommonTextField variant="outlined" label="Enter your email" />
             </Box>
             <Box className="form-group">
               <label>Password</label>
-              <CommonTextField id="lName" variant="outlined" label="Enter your password" />
+              <CommonTextField variant="outlined" label="Enter your password" />
             </Box>
             <Box className="form-group">
               <CommonButton component="label" variant="contained" startIcon={<CloudUpload />} style={{ backgroundColor: `${ColorPalette.secondaryColor}` }}>
