@@ -6,6 +6,12 @@ let axiosInstance = axios.create({
   baseURL,
 });
 
+export const status = Object.freeze({
+  idle: "SUCCESS",
+  loading: "LOADING",
+  error: "ERROR",
+});
+
 export { adminUrl };
 export const image = (media) => {
   return `https://wtsacademy.dedicateddevelopers.us/uploads/product/${media}`;

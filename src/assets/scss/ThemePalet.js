@@ -14,4 +14,5 @@ export const ColorPalette = {
   inputBorderColor: "#E7E7E7",
   authSubTitle: "#414141",
   errorColor: "#f00",
+  offWhite: "#f2f2f2",
 };

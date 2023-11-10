@@ -8,7 +8,7 @@ import { CopyRight } from "../style/CopyRight";
 import { AgreeBox, FooterTop } from "../style/FooterStyle";
 import CommonTitle from "../components/CommonTitle";
 import { ColorPalette } from "../assets/scss/ThemePalet";
-import CommonTextField from "../components/CommonTextField";
+import { CommonInputType } from "../style/CommonInputType";
 
 export default function Footer(newsletter) {
   const year = new Date().getFullYear();
@@ -18,7 +18,7 @@ export default function Footer(newsletter) {
         <FooterTop className="footerTop">
           <CommonTitle textColor={ColorPalette.blackColor} variant="h3" title="Get Weekly Diet stories to" subTitle="Keep Yourself Motivated" />
           <form className="newsletterField">
-            <CommonTextField id="newsletter" variant="outlined" label="Enter Your Email Id" />
+            <CommonInputType id="newsletter" variant="outlined" label="Enter Your Email Id" />
             <Button className="sendButton" variant="contained" endIcon={<Send />}></Button>
           </form>
           <AgreeBox>

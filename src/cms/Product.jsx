@@ -1,11 +1,19 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import { Container, Grid } from "@mui/material";
+import React, { useEffect } from "react";
 import CommonTitle from "../components/CommonTitle";
-import { ProductListItem, ProductListWrapper, TitleHolder } from "../style/ProductListsStyle";
-import assets from "../assets";
-import { CommonButton } from "../style/CommonButton";
-import { ColorPalette } from "../assets/scss/ThemePalet";
+import { ProductListWrapper, TitleHolder } from "../style/ProductListsStyle";
+import { useDispatch, useSelector } from "react-redux";
+import ProductItem from "../components/ProductItem";
+import { listProduct } from "../redux/slice/ProductSlice";
 export default function Product() {
+  const { items } = useSelector((state) => state?.Pro);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listProduct());
+  }, []);
+
   return (
     <>
       <section className="productsWrapper">
@@ -17,25 +25,9 @@ export default function Product() {
         <ProductListWrapper>
           <Container>
             <Grid container spacing={5}>
-              <ProductListItem item sm={6} md={4}>
-                <Card className="product">
-                  <CardMedia sx={{ height: 140 }} image={assets.blog1} title="green iguana" />
-                  <CardContent>
-                    <Typography gutterBottom variant="h4">
-                      Magnesium
-                    </Typography>
-                    <Typography variant="body2">Lorem Ipsum Dolar</Typography>
-                  </CardContent>
-                  <CardActions>
-                    <CommonButton variant="contained" className="update" style={{ backgroundColor: `${ColorPalette.lightBlue}` }}>
-                      Update
-                    </CommonButton>
-                    <CommonButton variant="contained" className="delete" style={{ backgroundColor: `${ColorPalette.primaryColor}` }}>
-                      Delete
-                    </CommonButton>
-                  </CardActions>
-                </Card>
-              </ProductListItem>
+              {items.map((element, index) => (
+                <ProductItem key={index * 2} title={element.title} description={element.description} image={element.image} />
+              ))}
             </Grid>
           </Container>
         </ProductListWrapper>

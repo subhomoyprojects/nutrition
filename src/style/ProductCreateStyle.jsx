@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { ColorPalette } from "../assets/scss/ThemePalet";
 
 export const ProductCreateStyle = styled(Box)`
+  padding-block: 6rem;
   form {
     max-width: 600px;
     margin-inline: auto;
@@ -59,5 +60,12 @@ export const ProductImageUpload = styled(Box)`
       height: 2.5rem;
       margin: 0;
     }
+  }
+  .error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 1rem;
   }
 `;
