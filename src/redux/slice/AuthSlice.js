@@ -20,15 +20,30 @@ export const AuthSlice = createSlice({
   initialState: {
     data: {
       full_Name: "",
-      isLogin: false,
     },
+    redirectTo: null,
+    isloggedIn: false,
     status: status.idle,
   },
   reducers: {
     logoutAuth: (state) => {
       localStorage.removeItem("token");
       state.data.full_Name = "";
-      state.data.isLogin = false;
+      state.isloggedIn = false;
+    },
+    check_token: (state, { payload }) => {
+      let token = localStorage.getItem("token");
+      if (token !== null && token !== undefined) {
+        state.isloggedIn = true;
+      }
+    },
+    reset_redirectTo: (state, { payload }) => {
+      state.redirectTo = payload;
+    },
+    handleLoggedout: (state, { payload }) => {
+      localStorage.removeItem("token");
+      state.isloggedIn = false;
+      toast("Logout SuccessFull");
     },
   },
   extraReducers: (builder) => {
@@ -63,8 +78,9 @@ export const AuthSlice = createSlice({
         if (payload.status === 200) {
           localStorage.setItem("token", payload.token);
           state.data.full_Name = payload.data.first_name + " " + payload.data.last_name;
-          state.data.isLogin = true;
+          state.isloggedIn = true;
           toast.success(`${payload.message}`);
+          state.redirectTo = "/";
         } else {
           toast.error("Login failed");
         }
@@ -79,5 +95,5 @@ export const AuthSlice = createSlice({
       });
   },
 });
-export const { logoutAuth } = AuthSlice.actions;
+export const { logoutAuth, check_token, reset_redirectTo, handleLoggedout } = AuthSlice.actions;
 export default AuthSlice.reducer;

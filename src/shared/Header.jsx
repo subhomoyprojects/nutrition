@@ -1,7 +1,7 @@
 import { Badge, Box, Button, Container, IconButton, Menu, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const pages = ["Home", "About", "Product", "Contact", "Create Product"];
 import assets from "../assets";
 import "./shared.scss";
@@ -9,12 +9,13 @@ import { HeaderAuth, HeaderWrapper } from "../style/HeaderStyle";
 import Search from "@mui/icons-material/Search";
 import { LocalMall, Logout, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAuth } from "../redux/slice/AuthSlice";
+import { handleLoggedout, logoutAuth } from "../redux/slice/AuthSlice";
 
 export default function Header() {
-  const tokenSelector = useSelector((state) => state.Auth);
+  const { isloggedIn } = useSelector((state) => state.Auth);
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -23,6 +24,13 @@ export default function Header() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const logOut = () => {
+    dispatch(handleLoggedout());
+    navigate("/login");
+  };
+
+  // onClick={() => dispatch(logoutAuth())}
 
   return (
     <HeaderWrapper position="static" color="transparent">
@@ -111,8 +119,8 @@ export default function Header() {
             <Button>
               Search <Search />
             </Button>
-            {tokenSelector.data.isLogin ? (
-              <Button onClick={() => dispatch(logoutAuth())}>
+            {isloggedIn ? (
+              <Button onClick={logOut}>
                 Logout <Logout />
               </Button>
             ) : (

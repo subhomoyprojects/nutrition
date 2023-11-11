@@ -4,18 +4,18 @@ import { Card, CardActions, CardContent, CardMedia, Typography } from "@mui/mate
 import { CommonButton } from "../style/CommonButton";
 import assets from "../assets";
 import { ColorPalette } from "../assets/scss/ThemePalet";
-import PropTypes from "prop-types";
+import { image } from "../redux/Helper";
 
-export default function ProductItem({ title, description, image }) {
+export default function ProductItem({ value }) {
   return (
     <ProductListItem item sm={6} md={4}>
       <Card className="product">
-        <CardMedia sx={{ height: 200 }} image={image !== "" ? image : assets.noImage} title="Product Image" />
+        {value?.image === undefined ? <CardMedia sx={{ height: 200 }} image={assets.noImage} title="Product Image" /> : <CardMedia sx={{ height: 200 }} image={image(value.image)} title="Product Image" />}
         <CardContent>
           <Typography gutterBottom variant="h4">
-            {title}
+            {value.title}
           </Typography>
-          <Typography variant="body2">{description}</Typography>
+          <Typography variant="body2">{value.description}</Typography>
         </CardContent>
         <CardActions>
           <CommonButton variant="contained" className="update" style={{ backgroundColor: `${ColorPalette.lightBlue}` }}>
@@ -29,9 +29,3 @@ export default function ProductItem({ title, description, image }) {
     </ProductListItem>
   );
 }
-
-ProductItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-};

@@ -26,7 +26,7 @@ export default function Product() {
           <Container>
             <Grid container spacing={5}>
               {items.map((element, index) => (
-                <ProductItem key={index * 2} title={element.title} description={element.description} image={element.image} />
+                <ProductItem key={index * 2} value={element} />
               ))}
             </Grid>
           </Container>

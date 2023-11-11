@@ -1,9 +1,11 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import Loading from "./common/Loading";
+import { check_token } from "./redux/slice/AuthSlice";
+import { useDispatch } from "react-redux";
 
 const Home = lazy(() => import("../src/cms/Home"));
 const About = lazy(() => import("../src/cms/About"));
@@ -70,6 +72,10 @@ const PublicRouteNames = [
 ];
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(check_token());
+  }, [dispatch]);
   return (
     <>
       <Suspense fallback={<Loading />}>

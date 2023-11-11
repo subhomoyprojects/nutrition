@@ -17,8 +17,16 @@ import ClientCountComponent from "../components/ClientCountComponent";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Testimonials } from "../json/TestimonialsJson";
 import { BlogItemJson } from "../json/BlogItemJson";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { reset_redirectTo } from "../redux/slice/AuthSlice";
 
 export default function Home() {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(reset_redirectTo(null));
+  // }, [dispatch]);
+
   let swiper;
   const breakpoints = {
     320: {
