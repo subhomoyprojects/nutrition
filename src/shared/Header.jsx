@@ -9,10 +9,10 @@ import { HeaderAuth, HeaderWrapper } from "../style/HeaderStyle";
 import Search from "@mui/icons-material/Search";
 import { LocalMall, Logout, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { handleLoggedout, logoutAuth } from "../redux/slice/AuthSlice";
+import { logoutAuth } from "../redux/slice/AuthSlice";
 
 export default function Header() {
-  const { isloggedIn } = useSelector((state) => state.Auth);
+  const { isLogin } = useSelector((state) => state.Auth);
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate();
@@ -26,11 +26,9 @@ export default function Header() {
   };
 
   const logOut = () => {
-    dispatch(handleLoggedout());
+    dispatch(logoutAuth());
     navigate("/login");
   };
-
-  // onClick={() => dispatch(logoutAuth())}
 
   return (
     <HeaderWrapper position="static" color="transparent">
@@ -119,7 +117,7 @@ export default function Header() {
             <Button>
               Search <Search />
             </Button>
-            {isloggedIn ? (
+            {isLogin ? (
               <Button onClick={logOut}>
                 Logout <Logout />
               </Button>

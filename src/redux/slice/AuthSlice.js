@@ -18,32 +18,25 @@ export const loginAuth = createAsyncThunk("/user/signin", async (formData) => {
 export const AuthSlice = createSlice({
   name: "AuthSlice",
   initialState: {
-    data: {
-      full_Name: "",
-    },
+    full_Name: "",
     redirectTo: null,
-    isloggedIn: false,
+    isLogin: false,
     status: status.idle,
   },
   reducers: {
-    logoutAuth: (state) => {
-      localStorage.removeItem("token");
-      state.data.full_Name = "";
-      state.isloggedIn = false;
-    },
     check_token: (state, { payload }) => {
       let token = localStorage.getItem("token");
       if (token !== null && token !== undefined) {
-        state.isloggedIn = true;
+        state.isLogin = true;
       }
     },
     reset_redirectTo: (state, { payload }) => {
       state.redirectTo = payload;
     },
-    handleLoggedout: (state, { payload }) => {
+    logoutAuth: (state, { payload }) => {
       localStorage.removeItem("token");
-      state.isloggedIn = false;
-      toast("Logout SuccessFull");
+      state.isLogin = false;
+      toast.error("Logout SuccessFull");
     },
   },
   extraReducers: (builder) => {
@@ -77,8 +70,8 @@ export const AuthSlice = createSlice({
         state.status = status.idle;
         if (payload.status === 200) {
           localStorage.setItem("token", payload.token);
-          state.data.full_Name = payload.data.first_name + " " + payload.data.last_name;
-          state.isloggedIn = true;
+          state.full_Name = payload.data.first_name + " " + payload.data.last_name;
+          state.isLogin = true;
           toast.success(`${payload.message}`);
           state.redirectTo = "/";
         } else {
@@ -95,5 +88,5 @@ export const AuthSlice = createSlice({
       });
   },
 });
-export const { logoutAuth, check_token, reset_redirectTo, handleLoggedout } = AuthSlice.actions;
+export const { check_token, reset_redirectTo, logoutAuth } = AuthSlice.actions;
 export default AuthSlice.reducer;
