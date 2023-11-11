@@ -24,7 +24,7 @@ export const AuthSlice = createSlice({
     status: status.idle,
   },
   reducers: {
-    check_token: (state, { payload }) => {
+    check_token: (state) => {
       let token = localStorage.getItem("token");
       if (token !== null && token !== undefined) {
         state.isLogin = true;
@@ -33,7 +33,7 @@ export const AuthSlice = createSlice({
     reset_redirectTo: (state, { payload }) => {
       state.redirectTo = payload;
     },
-    logoutAuth: (state, { payload }) => {
+    logoutAuth: (state) => {
       localStorage.removeItem("token");
       state.isLogin = false;
       toast.error("Logout SuccessFull");
