@@ -21,18 +21,13 @@ export default function CreateProduct() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const { title, description, image } = data;
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("image", image[0]);
-
-      const response = await dispatch(createProduct(formData));
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    const { title, description, image } = data;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image[0]);
+    const response = dispatch(createProduct(formData));
+    console.log(response);
   };
 
   return (
@@ -50,20 +45,33 @@ export default function CreateProduct() {
                     <img src={assets.noImage} alt="No Image Available" />
                   </figure>
                   <CommonButton className="upload" component="label" variant="contained" startIcon={<CloudUpload />} style={{ backgroundColor: `${ColorPalette.secondaryColor}` }}>
-                    <VisuallyHiddenInput type="file" />
-                    {/* {...register("image", { required: true })} */}
+                    <VisuallyHiddenInput type="file" {...register("image", { required: true })} />
                   </CommonButton>
-                  {/* <span className="error" error={!!errors.image}>
+                  <span className="error" error={!!errors.image}>
                     {errors.image?.type === "required" ? "Please add an image" : ""}
-                  </span> */}
+                  </span>
                 </ProductImageUpload>
                 <Box className="form-group">
                   <label>Title</label>
-                  <CommonInputType variant="outlined" label="Enter your Title" {...register("title", { required: true, minLength: 3 })} error={!!errors.title} helperText={errors.title?.type === "required" ? "Title is required" : errors.title?.type === "minLength" ? "Minimum 3 characters are required" : ""} />
+                  <CommonInputType
+                    variant="outlined"
+                    label="Enter your Title"
+                    {...register("title", { required: true, minLength: 3 })}
+                    error={!!errors.title}
+                    helperText={errors.title?.type === "required" ? "Title is required" : errors.title?.type === "minLength" ? "Minimum 3 characters are required" : ""}
+                  />
                 </Box>
                 <Box className="form-group">
                   <label>Description</label>
-                  <CommonInputType variant="outlined" label="Enter your Description" multiline={true} rows={4} {...register("description", { required: true, minLength: 3 })} error={!!errors.description} helperText={errors.description?.type === "required" ? "Description is required" : errors.description?.type === "minLength" ? "Minimum 3 characters are required" : ""} />
+                  <CommonInputType
+                    variant="outlined"
+                    label="Enter your Description"
+                    multiline={true}
+                    rows={4}
+                    {...register("description", { required: true, minLength: 3 })}
+                    error={!!errors.description}
+                    helperText={errors.description?.type === "required" ? "Description is required" : errors.description?.type === "minLength" ? "Minimum 3 characters are required" : ""}
+                  />
                 </Box>
                 <Box className="form-group text-center">
                   <CommonButton fullWidth type="submit" variant="contained" style={{ backgroundColor: `${ColorPalette.primaryColor}` }}>
