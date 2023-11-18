@@ -13,12 +13,23 @@ export const listProduct = createAsyncThunk("/product/list", async (formData) =>
   let resData = res?.data;
   return resData;
 });
+export const removeProduct = createAsyncThunk("/product/remove", async (productId) => {
+  let res = await axiosInstance.post("/product/remove", productId);
+  let resData = res?.data;
+  return resData;
+});
+export const updateProduct = createAsyncThunk("/product/update", async (formData) => {
+  let res = await axiosInstance.post("/product/update", formData);
+  let resData = res?.data;
+  return resData;
+});
 
 export const ProductSlice = createSlice({
   name: "ProductSlice",
   initialState: {
-    items: [{}],
+    items: [],
     status: status.idle,
+    isDelete: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -28,12 +39,12 @@ export const ProductSlice = createSlice({
       })
       .addCase(createProduct.fulfilled, (state, { payload }) => {
         state.status = status.idle;
-        state.items = payload.data;
+        state.items = payload?.data;
         toast.success(`${payload.message}`);
       })
-      .addCase(createProduct.rejected, (state) => {
+      .addCase(createProduct.rejected, (state, { error }) => {
         state.status = status.error;
-        toast.error(`${payload.message}`);
+        toast.error(`${error.message}`);
       })
 
       .addCase(listProduct.pending, (state) => {
@@ -41,14 +52,40 @@ export const ProductSlice = createSlice({
       })
       .addCase(listProduct.fulfilled, (state, { payload }) => {
         state.status = status.idle;
-        state.items = payload.data;
+        state.items = payload?.data;
         toast.success(`${payload.message}`);
       })
-      .addCase(listProduct.rejected, (state) => {
+      .addCase(listProduct.rejected, (state, { error }) => {
         state.status = status.error;
-        toast.error(`${payload.message}`);
+        toast.error(`${error.message}`);
+      })
+
+      .addCase(removeProduct.pending, (state) => {
+        state.status = status.loading;
+      })
+      .addCase(removeProduct.fulfilled, (state, { payload }) => {
+        state.status = status.idle;
+        state.items = state.items.filter((item) => item._id !== payload?.data);
+        toast.success(`${payload.message}`);
+      })
+      .addCase(removeProduct.rejected, (state, { error }) => {
+        state.status = status.error;
+        toast.error(`${error.message}`);
+      })
+
+      .addCase(updateProduct.pending, (state) => {
+        state.status = status.loading;
+      })
+      .addCase(updateProduct.fulfilled, (state, { payload }) => {
+        state.status = status.idle;
+        localStorage.setItem("title", payload?.data?.title);
+        toast.success(`${payload.message}`);
+      })
+      .addCase(updateProduct.rejected, (state, { error }) => {
+        state.status = status.error;
+        toast.error(`${error.message}`);
       });
   },
 });
-
+export const { deleteProduct } = ProductSlice.actions;
 export default ProductSlice.reducer;

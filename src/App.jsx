@@ -16,6 +16,7 @@ const Login = lazy(() => import("../src/auth/Login"));
 const Signup = lazy(() => import("../src/auth/Signup"));
 const Profile = lazy(() => import("../src/user/Profile"));
 const CreateProduct = lazy(() => import("../src/user/CreateProduct"));
+const UpdateProduct = lazy(() => import("../src/user/UpdateProduct"));
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -45,6 +46,10 @@ const PrivateRouteNames = [
   {
     path: "/createproduct",
     Component: <CreateProduct />,
+  },
+  {
+    path: "/update/:id",
+    Component: <UpdateProduct />,
   },
 ];
 

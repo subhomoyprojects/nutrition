@@ -12,7 +12,7 @@ export default function Product() {
 
   useEffect(() => {
     dispatch(listProduct());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -25,9 +25,7 @@ export default function Product() {
         <ProductListWrapper>
           <Container>
             <Grid container spacing={5}>
-              {items.map((element, index) => (
-                <ProductItem key={index * 2} value={element} />
-              ))}
+              {Array.isArray(items) && items.map((element, index) => <ProductItem key={index * 2} value={element} />)}
             </Grid>
           </Container>
         </ProductListWrapper>

@@ -23,14 +23,34 @@ export const ProductListItem = styled(Grid)`
     p {
       font-size: 1.5rem;
     }
-    button {
+    button,
+    a {
       padding-inline: 2rem;
       font-size: 1.6rem;
       min-height: 4rem;
       border-radius: 1rem;
+      line-height: normal;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-inline: 5px;
+      border: none;
+    }
+    a {
+      &.update {
+        background-color: ${ColorPalette.secondaryColor};
+        min-width: auto;
+        &:hover {
+          background-color: ${ColorPalette.blackColor};
+        }
+      }
     }
     .MuiCardActions-root {
       justify-content: center;
+    }
+    .css-muxve-MuiCardMedia-root {
+      background-size: contain;
     }
   }
 `;
