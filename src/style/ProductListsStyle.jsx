@@ -49,7 +49,8 @@ export const ProductListItem = styled(Grid)`
     .MuiCardActions-root {
       justify-content: center;
     }
-    .css-muxve-MuiCardMedia-root {
+    .css-muxve-MuiCardMedia-root,
+    .css-tmr11v {
       background-size: contain;
     }
   }
