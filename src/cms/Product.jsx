@@ -1,17 +1,21 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Pagination, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import CommonTitle from "../components/CommonTitle";
 import { ProductListWrapper, TitleHolder } from "../style/ProductListsStyle";
 import { useDispatch, useSelector } from "react-redux";
 import ProductItem from "../components/ProductItem";
 import { listProduct } from "../redux/slice/ProductSlice";
+import CustomPaginationComponent from "../components/CustomPaginationComponent";
 export default function Product() {
-  const { items } = useSelector((state) => state?.Pro);
+  const { items, totalPage, page } = useSelector((state) => state?.Pro);
 
+  const handelChange = (e, pageNumber) => {
+    dispatch(listProduct({ page: pageNumber, perpage: 9 }));
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listProduct());
+    dispatch(listProduct({ perpage: 9 }));
   }, [dispatch]);
 
   return (
@@ -28,6 +32,11 @@ export default function Product() {
               {Array.isArray(items) && items.map((element, index) => <ProductItem key={index * 2} value={element} />)}
             </Grid>
           </Container>
+          {items.length !== 0 ? (
+            <Stack spacing={2}>
+              <CustomPaginationComponent totalPage={totalPage} handelChange={handelChange} page={page} />
+            </Stack>
+          ) : null}
         </ProductListWrapper>
       </section>
     </>

@@ -30,6 +30,8 @@ export const ProductSlice = createSlice({
     items: [],
     status: status.idle,
     isDelete: false,
+    totalPage: null,
+    page: 1,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -53,6 +55,8 @@ export const ProductSlice = createSlice({
       .addCase(listProduct.fulfilled, (state, { payload }) => {
         state.status = status.idle;
         state.items = payload?.data;
+        state.totalPage = payload?.totalPages;
+        state.page = payload?.currentPage;
         toast.success(`${payload.message}`);
       })
       .addCase(listProduct.rejected, (state, { error }) => {

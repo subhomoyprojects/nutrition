@@ -10,7 +10,7 @@ import CommonTitle from "../components/CommonTitle";
 import { CommonInputType } from "../style/CommonInputType";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { createProduct } from "../redux/slice/ProductSlice";
+import { createProduct, listProduct } from "../redux/slice/ProductSlice";
 
 export default function CreateProduct() {
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ export default function CreateProduct() {
 
     try {
       const response = await dispatch(createProduct(formData));
+      dispatch(listProduct({ perpage: 9 }));
       console.log(response);
     } catch (error) {
       console.error("Error creating product:", error);
@@ -77,12 +78,24 @@ export default function CreateProduct() {
                 </ProductImageUpload>
                 <Box className="form-group">
                   <label>Title</label>
-                  <Controller name="title" control={control} defaultValue="" rules={{ required: "Title is required", minLength: { value: 3, message: "Minimum 3 characters are required" } }} render={({ field }) => <CommonInputType {...field} variant="outlined" label="Enter your Title" error={!!errors.title} helperText={errors.title?.message} />} />
+                  <Controller
+                    name="title"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: "Title is required", minLength: { value: 3, message: "Minimum 3 characters are required" } }}
+                    render={({ field }) => <CommonInputType {...field} variant="outlined" label="Enter your Title" error={!!errors.title} helperText={errors.title?.message} />}
+                  />
                   {/* <CommonInputType variant="outlined" label="Enter your Title" {...register("title", { required: true, minLength: 3 })} error={!!errors.title} helperText={errors.title?.type === "required" ? "Title is required" : errors.title?.type === "minLength" ? "Minimum 3 characters are required" : ""} /> */}
                 </Box>
                 <Box className="form-group">
                   <label>Description</label>
-                  <Controller name="description" control={control} defaultValue="" rules={{ required: "Description is required", minLength: { value: 3, message: "Minimum 3 characters are required" } }} render={({ field }) => <CommonInputType {...field} variant="outlined" label="Enter your Description" multiline={true} rows={4} error={!!errors.description} helperText={errors.description?.message} />} />
+                  <Controller
+                    name="description"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: "Description is required", minLength: { value: 3, message: "Minimum 3 characters are required" } }}
+                    render={({ field }) => <CommonInputType {...field} variant="outlined" label="Enter your Description" multiline={true} rows={4} error={!!errors.description} helperText={errors.description?.message} />}
+                  />
                 </Box>
                 <Box className="form-group text-center">
                   <CommonButton fullWidth type="submit" variant="contained" style={{ backgroundColor: `${ColorPalette.primaryColor}` }}>

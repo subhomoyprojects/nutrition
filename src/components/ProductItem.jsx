@@ -28,6 +28,7 @@ export default function ProductItem({ value }) {
           <CommonButton
             onClick={() => {
               dispatch(removeProduct({ id: value._id })).then(() => dispatch(listProduct()));
+              dispatch(listProduct({ perpage: 9 }));
             }}
             variant="contained"
             className="delete"
