@@ -52,7 +52,8 @@ export const ProductImageUpload = styled(Box)`
     min-height: auto;
     display: inline-flex;
     margin-inline: auto;
-    .css-1d6wzja-MuiButton-startIcon {
+    .css-1d6wzja-MuiButton-startIcon,
+    .css-6xugel {
       margin: 0;
     }
     svg {
