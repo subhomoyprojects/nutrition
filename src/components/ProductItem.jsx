@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ProductListItem } from "../style/ProductListsStyle";
 import { Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import { CommonButton } from "../style/CommonButton";
 import assets from "../assets";
 import { ColorPalette } from "../assets/scss/ThemePalet";
 import { image } from "../redux/Helper";
-import { useDispatch } from "react-redux";
-import { listProduct, removeProduct } from "../redux/slice/ProductSlice";
 import { Link } from "react-router-dom";
+import CustomModalComponent from "./CustomModalComponent";
 
 export default function ProductItem({ value }) {
-  const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(false);
+  const handleClose = () => {
+    setOpenModal(false);
+  };
   return (
     <ProductListItem item sm={6} md={4}>
       <Card className="product">
@@ -27,8 +29,7 @@ export default function ProductItem({ value }) {
           </Link>
           <CommonButton
             onClick={() => {
-              dispatch(removeProduct({ id: value._id })).then(() => dispatch(listProduct()));
-              dispatch(listProduct({ perpage: 9 }));
+              setOpenModal(true);
             }}
             variant="contained"
             className="delete"
@@ -38,6 +39,7 @@ export default function ProductItem({ value }) {
           </CommonButton>
         </CardActions>
       </Card>
+      <CustomModalComponent openModal={openModal} handleClose={handleClose} id={value._id} />
     </ProductListItem>
   );
 }
