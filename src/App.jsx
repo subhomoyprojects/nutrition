@@ -82,7 +82,7 @@ function App() {
     dispatch(check_token());
   }, [dispatch]);
   const location = window.location.pathname;
-  console.log(location);
+  console.log("Update", location);
   return (
     <>
       <Suspense fallback={<Loading />}>
