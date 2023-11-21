@@ -65,9 +65,7 @@ export default function Signup() {
                 Upload file
                 <VisuallyHiddenInput type="file" {...register("profile_pic", { required: true })} />
               </CommonButton>
-              <span className="error" error={!!errors.profile_pic}>
-                {errors.profile_pic?.type === "required" ? "Please add an image" : ""}
-              </span>
+              {!!errors.profile_pic && <span className="error">{errors.profile_pic?.type === "required" ? "Please add an image" : ""}</span>}
             </Box>
             <Box className="form-group text-center">
               <CommonButton type="submit" fullWidth variant="contained" style={{ backgroundColor: `${ColorPalette.primaryColor}` }}>

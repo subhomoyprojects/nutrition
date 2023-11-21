@@ -26,7 +26,7 @@ export const LeftBox = styled(Box)`
   justify-content: center;
   .pageGo {
     font-size: 1.6rem;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     a {
       color: ${ColorPalette.primaryColor};
       &:hover {
@@ -40,7 +40,7 @@ export const LeftSideHolder = styled(Box)`
   max-width: 510px;
   padding: 3rem;
   .logoHolder {
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
   }
   .description {
     font-size: 1.6rem;

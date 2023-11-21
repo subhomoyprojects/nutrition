@@ -4,6 +4,7 @@ import { CommonBox, LeftBox, LeftSideHolder, MiddleContent, RightBox } from "../
 import CommonTitle from "../components/CommonTitle";
 import { ColorPalette } from "../assets/scss/ThemePalet";
 import assets from "../assets";
+import { Link } from "react-router-dom";
 
 export default function CommonAuthWrapper({ title, subInfo, children, rightImage }) {
   return (
@@ -14,7 +15,9 @@ export default function CommonAuthWrapper({ title, subInfo, children, rightImage
             <LeftSideHolder>
               <Box>
                 <Box className="logoHolder">
-                  <img src={assets.logo} alt="" />
+                  <Link to="/">
+                    <img src={assets.logo} alt="" />
+                  </Link>
                 </Box>
                 <CommonTitle variant="h2" subTitle="" title={title} textColor={ColorPalette.blackColor} />
                 <Typography className="description" variant="body1">

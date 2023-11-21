@@ -29,7 +29,6 @@ export const ProductSlice = createSlice({
   initialState: {
     items: [],
     status: status.idle,
-    isDelete: false,
     totalPage: null,
     page: 1,
   },

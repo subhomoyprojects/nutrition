@@ -81,11 +81,13 @@ function App() {
   useEffect(() => {
     dispatch(check_token());
   }, [dispatch]);
+  const location = window.location.pathname;
+  console.log(location);
   return (
     <>
       <Suspense fallback={<Loading />}>
         <Router>
-          <Header />
+          {location !== "/login" && location !== "/signup" && <Header />}
           <Routes>
             {PublicRouteNames?.map((route, index) => {
               return <Route key={index} exact path={route.path} element={route.Component} />;
@@ -95,7 +97,7 @@ function App() {
               return <Route key={index} path={route.path} element={<PrivateRoute>{route.Component}</PrivateRoute>} />;
             })}
           </Routes>
-          <Footer />
+          {location !== "/login" && location !== "/signup" && <Footer />}
         </Router>
       </Suspense>
     </>
