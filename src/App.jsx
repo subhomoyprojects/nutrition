@@ -1,8 +1,8 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes, useLocation, Navigate } from "react-router-dom";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
-import { Suspense, lazy, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import Loading from "./common/Loading";
 import { check_token } from "./redux/slice/AuthSlice";
 import { useDispatch } from "react-redux";
@@ -76,28 +76,44 @@ const PublicRouteNames = [
   },
 ];
 
+function MyRoutes({ locationGet }) {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    locationGet(pathname);
+  }, [pathname]);
+
+  return (
+    <Routes>
+      {PublicRouteNames?.map((route, index) => (
+        <Route key={index} exact path={route.path} element={route.Component} />
+      ))}
+
+      {PrivateRouteNames?.map((route, index) => (
+        <Route key={index} path={route.path} element={<PrivateRoute>{route.Component}</PrivateRoute>} />
+      ))}
+    </Routes>
+  );
+}
+
 function App() {
   const dispatch = useDispatch();
+  const [url, setUrl] = useState("");
+
   useEffect(() => {
     dispatch(check_token());
   }, [dispatch]);
-  const location = window.location.pathname;
-  console.log("Update", location);
+
+  const locationGet = (location) => {
+    setUrl(location);
+  };
+
   return (
     <>
       <Suspense fallback={<Loading />}>
         <Router>
-          {location !== "/login" && location !== "/signup" && <Header />}
-          <Routes>
-            {PublicRouteNames?.map((route, index) => {
-              return <Route key={index} exact path={route.path} element={route.Component} />;
-            })}
-
-            {PrivateRouteNames?.map((route, index) => {
-              return <Route key={index} path={route.path} element={<PrivateRoute>{route.Component}</PrivateRoute>} />;
-            })}
-          </Routes>
-          {location !== "/login" && location !== "/signup" && <Footer />}
+          {url !== "/login" && url !== "/signup" && <Header />}
+          <MyRoutes locationGet={locationGet} />
+          {url !== "/login" && url !== "/signup" && <Footer />}
         </Router>
       </Suspense>
     </>
