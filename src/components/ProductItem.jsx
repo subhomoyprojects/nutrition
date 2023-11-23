@@ -5,18 +5,34 @@ import { CommonButton } from "../style/CommonButton";
 import assets from "../assets";
 import { ColorPalette } from "../assets/scss/ThemePalet";
 import { image } from "../redux/Helper";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomModalComponent from "./CustomModalComponent";
+import { useDispatch } from "react-redux";
+import { detailsProduct } from "../redux/slice/ProductSlice";
 
 export default function ProductItem({ value }) {
   const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClose = () => {
     setOpenModal(false);
   };
   return (
     <ProductListItem item sm={6} md={4}>
       <Card className="product">
-        {value?.image === undefined ? <CardMedia sx={{ height: 200 }} image={assets.noImage} title="Product Image" /> : <CardMedia sx={{ height: 200 }} image={image(value.image)} title="Product Image" />}
+        {value?.image === undefined ? (
+          <CardMedia sx={{ height: 200 }} image={assets.noImage} title="Product Image" />
+        ) : (
+          <CardMedia
+            sx={{ height: 200 }}
+            image={image(value.image)}
+            title="Product Image"
+            onClick={() => {
+              dispatch(detailsProduct(value._id));
+              navigate(`/product/detail/${value._id}`);
+            }}
+          />
+        )}
         <CardContent>
           <Typography gutterBottom variant="h4">
             {value.title}

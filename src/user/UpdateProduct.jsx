@@ -12,7 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { image } from "../redux/Helper";
-import { createProduct, updateProduct } from "../redux/slice/ProductSlice";
+import { updateProduct } from "../redux/slice/ProductSlice";
 
 export default function CreateProduct() {
   const [prevImage, setPrevImage] = useState(null);

@@ -23,6 +23,18 @@ export const ProductListItem = styled(Grid)`
     p {
       font-size: 1.5rem;
     }
+    .proImageHolder {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      & > * {
+        width: 100%;
+      }
+    }
     button,
     a {
       padding-inline: 2rem;

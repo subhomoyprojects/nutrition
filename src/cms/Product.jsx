@@ -32,7 +32,7 @@ export default function Product() {
               {Array.isArray(items) && items.map((element, index) => <ProductItem key={index * 2} value={element} />)}
             </Grid>
           </Container>
-          {items.length !== 0 ? (
+          {Array.isArray(items) && items.length !== 0 ? (
             <Stack spacing={2}>
               <CustomPaginationComponent totalPage={totalPage} handelChange={handelChange} page={page} />
             </Stack>

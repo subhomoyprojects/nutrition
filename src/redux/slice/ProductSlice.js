@@ -24,6 +24,12 @@ export const updateProduct = createAsyncThunk("/product/update", async (formData
   return resData;
 });
 
+export const detailsProduct = createAsyncThunk("/product/detail", async (id) => {
+  const res = await axiosInstance.get(`/product/detail/${id}`);
+  const resData = res?.data;
+  return resData;
+});
+
 export const ProductSlice = createSlice({
   name: "ProductSlice",
   initialState: {
@@ -31,6 +37,7 @@ export const ProductSlice = createSlice({
     status: status.idle,
     totalPage: null,
     page: 1,
+    details: "",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -85,6 +92,19 @@ export const ProductSlice = createSlice({
         toast.success(`${payload.message}`);
       })
       .addCase(updateProduct.rejected, (state, { error }) => {
+        state.status = status.error;
+        toast.error(`${error.message}`);
+      })
+
+      .addCase(detailsProduct.pending, (state) => {
+        state.status = status.loading;
+      })
+      .addCase(detailsProduct.fulfilled, (state, { payload }) => {
+        state.status = status.idle;
+        state.details = payload?.data;
+        toast.success(`${payload.message}`);
+      })
+      .addCase(detailsProduct.rejected, (state, { error }) => {
         state.status = status.error;
         toast.error(`${error.message}`);
       });

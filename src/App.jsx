@@ -36,7 +36,7 @@ const PrivateRouteNames = [
     Component: <Product />,
   },
   {
-    path: "/productDetails",
+    path: "/product/detail/:id",
     Component: <ProductDetails />,
   },
   {
