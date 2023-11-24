@@ -61,3 +61,8 @@ export const HeaderAuth = styled(Box)`
     }
   }
 `;
+export const MyProfile = styled(Box)`
+  .MuiStack-root {
+    align-items: center;
+  }
+`;

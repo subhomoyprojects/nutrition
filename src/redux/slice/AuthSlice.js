@@ -18,7 +18,6 @@ export const loginAuth = createAsyncThunk("/user/signin", async (formData) => {
 export const AuthSlice = createSlice({
   name: "AuthSlice",
   initialState: {
-    full_Name: "",
     redirectTo: null,
     isLogin: false,
     status: status.idle,
@@ -35,6 +34,7 @@ export const AuthSlice = createSlice({
     },
     logoutAuth: (state) => {
       localStorage.removeItem("token");
+      localStorage.removeItem("loginDetails");
       state.isLogin = false;
       toast.error("Logout SuccessFull");
     },
@@ -71,6 +71,7 @@ export const AuthSlice = createSlice({
         if (payload.status === 200) {
           localStorage.setItem("token", payload.token);
           state.full_Name = payload.data.first_name + " " + payload.data.last_name;
+          localStorage.setItem("loginDetails", JSON.stringify(payload?.data));
           state.isLogin = true;
           toast.success(`${payload.message}`);
           state.redirectTo = "/";
