@@ -65,4 +65,7 @@ export const MyProfile = styled(Box)`
   .MuiStack-root {
     align-items: center;
   }
+  button {
+    margin-left: 1rem !important;
+  }
 `;

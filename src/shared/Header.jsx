@@ -1,11 +1,11 @@
-import { Badge, Box, Button, Container, IconButton, Menu, Toolbar } from "@mui/material";
+import { Avatar, Badge, Box, Button, Container, IconButton, Menu, Stack, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 const pages = ["Home", "About", "Product", "Contact", "Create Product"];
 import assets from "../assets";
 import "./shared.scss";
-import { HeaderAuth, HeaderWrapper } from "../style/HeaderStyle";
+import { HeaderAuth, HeaderWrapper, MyProfile } from "../style/HeaderStyle";
 import Search from "@mui/icons-material/Search";
 import { LocalMall, Logout, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,8 @@ export default function Header() {
     dispatch(logoutAuth());
     navigate("/login");
   };
+
+  const loginDetails = JSON.parse(localStorage.getItem("loginDetails"));
 
   return (
     <HeaderWrapper position="static" color="transparent">
@@ -114,25 +116,18 @@ export default function Header() {
           </Box>
 
           <HeaderAuth sx={{ flexGrow: 0 }}>
-            <Button>
-              Search <Search />
-            </Button>
             {isLogin ? (
-              <Button onClick={logOut}>
-                Logout <Logout />
-              </Button>
+              <MyProfile>
+                <Stack direction="row" spacing={2}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Button>Welcome, {loginDetails ? `${loginDetails.first_name} ${loginDetails.last_name}` : "User"}</Button>
+                </Stack>
+              </MyProfile>
             ) : (
               <Link to="/login">
                 Login <PersonOutline />
               </Link>
             )}
-
-            <Button>
-              Cart
-              <Badge color="warning" badgeContent={0}>
-                <LocalMall />
-              </Badge>
-            </Button>
           </HeaderAuth>
         </Toolbar>
       </Container>

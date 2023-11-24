@@ -71,8 +71,8 @@ export const AuthSlice = createSlice({
         if (payload.status === 200) {
           localStorage.setItem("token", payload.token);
           state.full_Name = payload.data.first_name + " " + payload.data.last_name;
-          localStorage.setItem("loginDetails", JSON.stringify(payload?.data));
           state.isLogin = true;
+          localStorage.setItem("loginDetails", JSON.stringify(payload?.data));
           toast.success(`${payload.message}`);
           state.redirectTo = "/";
         } else {
