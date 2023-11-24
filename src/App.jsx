@@ -14,7 +14,6 @@ const Product = lazy(() => import("../src/cms/Product"));
 const ProductDetails = lazy(() => import("../src/cms/ProductDetails"));
 const Login = lazy(() => import("../src/auth/Login"));
 const Signup = lazy(() => import("../src/auth/Signup"));
-const Profile = lazy(() => import("../src/user/Profile"));
 const CreateProduct = lazy(() => import("../src/user/CreateProduct"));
 const UpdateProduct = lazy(() => import("../src/user/UpdateProduct"));
 
@@ -38,10 +37,6 @@ const PrivateRouteNames = [
   {
     path: "/product/detail/:id",
     Component: <ProductDetails />,
-  },
-  {
-    path: "/profile",
-    Component: <Profile />,
   },
   {
     path: "/createproduct",
