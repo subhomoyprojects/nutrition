@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAuth } from "../redux/slice/AuthSlice";
 
 export default function Header() {
-  const { isLogin } = useSelector((state) => state.Auth);
+  const { isLogin, full_Name } = useSelector((state) => state.Auth);
+  console.log(full_Name);
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate();
@@ -119,7 +120,8 @@ export default function Header() {
               <MyProfile>
                 <Stack direction="row" spacing={2}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                  <Button onClick={logOut}>Welcome, {loginDetails ? `${loginDetails.first_name} ${loginDetails.last_name}` : "User"}</Button>
+                  {/* <Button onClick={logOut}>Welcome, {loginDetails ? `${loginDetails.first_name} ${loginDetails.last_name}` : "User"}</Button> */}
+                  <Button onClick={logOut}>Welcome, {full_Name ? `${full_Name}` : "User"}</Button>
                 </Stack>
               </MyProfile>
             ) : (

@@ -21,6 +21,7 @@ export const AuthSlice = createSlice({
     redirectTo: null,
     isLogin: false,
     status: status.idle,
+    full_Name: "",
   },
   reducers: {
     check_token: (state) => {
@@ -70,13 +71,16 @@ export const AuthSlice = createSlice({
         state.status = status.idle;
         if (payload.status === 200) {
           localStorage.setItem("token", payload.token);
-          state.full_Name = payload.data.first_name + " " + payload.data.last_name;
           state.isLogin = true;
           localStorage.setItem("loginDetails", JSON.stringify(payload?.data));
           toast.success(`${payload.message}`);
           state.redirectTo = "/";
         } else {
           toast.error("Login failed");
+        }
+        let token = localStorage.getItem("token");
+        if (token !== null && token !== undefined) {
+          state.full_Name = payload.data.first_name + " " + payload.data.last_name;
         }
       })
       .addCase(loginAuth.rejected, (state, { error }) => {
