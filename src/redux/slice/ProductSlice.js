@@ -102,6 +102,7 @@ export const ProductSlice = createSlice({
       .addCase(detailsProduct.fulfilled, (state, { payload }) => {
         state.status = status.idle;
         state.details = payload?.data;
+        localStorage.setItem("productDetails", JSON.stringify(payload?.data));
         toast.success(`${payload.message}`);
       })
       .addCase(detailsProduct.rejected, (state, { error }) => {
