@@ -6,8 +6,7 @@ const pages = ["Home", "About", "Product", "Contact", "Create Product"];
 import assets from "../assets";
 import "./shared.scss";
 import { HeaderAuth, HeaderWrapper, MyProfile } from "../style/HeaderStyle";
-import Search from "@mui/icons-material/Search";
-import { LocalMall, Logout, PersonOutline } from "@mui/icons-material";
+import { Logout, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAuth } from "../redux/slice/AuthSlice";
 
@@ -120,7 +119,7 @@ export default function Header() {
               <MyProfile>
                 <Stack direction="row" spacing={2}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                  <Button>Welcome, {loginDetails ? `${loginDetails.first_name} ${loginDetails.last_name}` : "User"}</Button>
+                  <Button onClick={logOut}>Welcome, {loginDetails ? `${loginDetails.first_name} ${loginDetails.last_name}` : "User"}</Button>
                 </Stack>
               </MyProfile>
             ) : (
