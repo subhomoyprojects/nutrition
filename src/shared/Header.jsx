@@ -1,4 +1,4 @@
-import { Avatar, Badge, Box, Button, Container, IconButton, Menu, Stack, Toolbar } from "@mui/material";
+import { Avatar, Box, Button, Container, IconButton, Menu, Stack, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,10 +9,11 @@ import { HeaderAuth, HeaderWrapper, MyProfile } from "../style/HeaderStyle";
 import { Logout, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAuth } from "../redux/slice/AuthSlice";
+import { profile_pic } from "../redux/Helper";
 
 export default function Header() {
-  const { isLogin, full_Name } = useSelector((state) => state.Auth);
-  console.log(full_Name);
+  const { isLogin, fullName, userAbater } = useSelector((state) => state.Auth);
+  console.log(isLogin);
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate();
@@ -29,8 +30,6 @@ export default function Header() {
     dispatch(logoutAuth());
     navigate("/login");
   };
-
-  const loginDetails = JSON.parse(localStorage.getItem("loginDetails"));
 
   return (
     <HeaderWrapper position="static" color="transparent">
@@ -119,9 +118,11 @@ export default function Header() {
             {isLogin ? (
               <MyProfile>
                 <Stack direction="row" spacing={2}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                  {/* <Button onClick={logOut}>Welcome, {loginDetails ? `${loginDetails.first_name} ${loginDetails.last_name}` : "User"}</Button> */}
-                  <Button onClick={logOut}>Welcome, {full_Name ? `${full_Name}` : "User"}</Button>
+                  <Avatar alt={fullName} src={profile_pic(userAbater)} />
+                  <p>Welcome, {fullName !== "" && fullName !== undefined ? `${fullName}` : "User"}</p>
+                  <Button onClick={logOut}>
+                    Logout <Logout />
+                  </Button>
                 </Stack>
               </MyProfile>
             ) : (

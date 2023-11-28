@@ -23,7 +23,7 @@ export const HeaderWrapper = styled(AppBar)`
   .navigation {
     display: flex;
     align-items: center;
-    column-gap: 5rem;
+    column-gap: 3rem;
     text-transform: capitalize;
     a {
       font-size: 1.6rem;
@@ -67,5 +67,17 @@ export const MyProfile = styled(Box)`
   }
   button {
     margin-left: 1rem !important;
+  }
+  .MuiAvatar-circular {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background-color: ${ColorPalette.primaryColor};
+  }
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: ${ColorPalette.blackColor};
+    display: inline-flex;
+    align-items: center;
   }
 `;

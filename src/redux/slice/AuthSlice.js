@@ -21,13 +21,17 @@ export const AuthSlice = createSlice({
     redirectTo: null,
     isLogin: false,
     status: status.idle,
-    full_Name: "",
+    fullName: "",
+    userAbater: "",
   },
   reducers: {
     check_token: (state) => {
       let token = localStorage.getItem("token");
+      let loginDetails = JSON.parse(localStorage.getItem("loginDetails"));
       if (token !== null && token !== undefined) {
         state.isLogin = true;
+        state.fullName = `${loginDetails.first_name} ${loginDetails.last_name}`;
+        state.userAbater = `${loginDetails.profile_pic}`;
       }
     },
     reset_redirectTo: (state, { payload }) => {
@@ -35,6 +39,7 @@ export const AuthSlice = createSlice({
     },
     logoutAuth: (state) => {
       localStorage.removeItem("token");
+      localStorage.removeItem("loginDetails");
       localStorage.removeItem("loginDetails");
       state.isLogin = false;
       toast.error("Logout SuccessFull");
@@ -72,7 +77,6 @@ export const AuthSlice = createSlice({
         if (payload.status === 200) {
           localStorage.setItem("token", payload.token);
           state.isLogin = true;
-          localStorage.setItem("loginDetails", JSON.stringify(payload?.data));
           toast.success(`${payload.message}`);
           state.redirectTo = "/";
         } else {
@@ -80,8 +84,11 @@ export const AuthSlice = createSlice({
         }
         let token = localStorage.getItem("token");
         if (token !== null && token !== undefined) {
-          state.full_Name = payload.data.first_name + " " + payload.data.last_name;
+          localStorage.setItem("loginDetails", JSON.stringify(payload.data));
         }
+        let loginDetails = JSON.parse(localStorage.getItem("loginDetails"));
+        state.fullName = `${loginDetails.first_name} ${loginDetails.last_name}`;
+        state.userAbater = `${loginDetails.profile_pic}`;
       })
       .addCase(loginAuth.rejected, (state, { error }) => {
         state.status = status.error;
