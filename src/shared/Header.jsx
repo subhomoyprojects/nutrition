@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Container, IconButton, Menu, Stack, Toolbar } from
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-const pages = ["Home", "About", "Product", "Contact", "Create Product"];
+const pages = ["Home", "Product", "Create Product"];
 import assets from "../assets";
 import "./shared.scss";
 import { HeaderAuth, HeaderWrapper, MyProfile } from "../style/HeaderStyle";

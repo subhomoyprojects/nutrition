@@ -8,8 +8,6 @@ import { check_token } from "./redux/slice/AuthSlice";
 import { useDispatch } from "react-redux";
 
 const Home = lazy(() => import("../src/cms/Home"));
-const About = lazy(() => import("../src/cms/About"));
-const Contact = lazy(() => import("../src/cms/Contact"));
 const Product = lazy(() => import("../src/cms/Product"));
 const ProductDetails = lazy(() => import("../src/cms/ProductDetails"));
 const Login = lazy(() => import("../src/auth/Login"));
@@ -52,14 +50,6 @@ const PublicRouteNames = [
   {
     path: "/",
     Component: <Home />,
-  },
-  {
-    path: "/about",
-    Component: <About />,
-  },
-  {
-    path: "/contact",
-    Component: <Contact />,
   },
   {
     path: "/login",
