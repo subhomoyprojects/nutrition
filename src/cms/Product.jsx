@@ -29,7 +29,7 @@ export default function Product() {
         <ProductListWrapper>
           <Container>
             <Grid container spacing={5}>
-              {Array.isArray(items) && items.map((element, index) => <ProductItem key={index * 2} value={element} />)}
+              {Array.isArray(items) && items.length > 0 ? items.map((element, index) => <ProductItem key={index} value={element} />) : <h2 className="noProduct">You haven't any product yet</h2>}
             </Grid>
           </Container>
           {Array.isArray(items) && items.length !== 0 ? (

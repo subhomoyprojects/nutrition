@@ -142,3 +142,12 @@ p {
   font-size: 1.1rem !important;
   color: #d32f2f;
 }
+.noProduct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30rem;
+  text-align: center;
+  width: 100%;
+  color: rgba($lightBlue, 0.5);
+}
